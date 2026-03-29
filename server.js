@@ -8,4 +8,9 @@ app.post('/chat', async (req, res) => {
     res.json({ reply: result });
 });
 
-app.listen(3000, () => console.log("Server 3000 par chalu hai!"));
+// server.js mein ise change karo
+const PORT = process.env.PORT || 8080;
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+});
