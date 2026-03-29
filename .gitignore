@@ -116,3 +116,6 @@ $RECYCLE.BIN/
 
 # Linux
 *~
+
+# Specifically ignore the service account key
+agent-assessment-656aaeb8566f.json
