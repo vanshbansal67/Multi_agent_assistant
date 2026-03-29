@@ -1,28 +1,18 @@
 const admin = require("firebase-admin");
 
-// Apni downloaded JSON file ka path yahan do
-const serviceAccount = require("./agent-assessment-656aaeb8566f.json");
-admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount)
-});
-
-const db = admin.firestore();
-
-// Test Function: Check karne ke liye ki connection kaam kar raha hai ya nahi
-async function testConnection() {
-    try {
-        const docRef = db.collection('tasks').doc('test-task');
-        await docRef.set({
-            title: 'Hello Agent!',
-            status: 'connected',
-            timestamp: new Date()
-        });
-        console.log("🔥 Database Connected Successfully!");
-    } catch (error) {
-        console.error("❌ Connection Error:", error);
-    }
+// Agar environment variable mil jaye toh use parse karo, warna local file (development ke liye)
+let serviceAccount;
+if (process.env.SERVICE_ACCOUNT_JSON) {
+    serviceAccount = JSON.parse(process.env.SERVICE_ACCOUNT_JSON);
+} else {
+    serviceAccount = require("./agent-assessment-656aaeb8566f.json");
 }
 
-testConnection();
+if (!admin.apps.length) {
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount)
+    });
+}
 
+const db = admin.firestore();
 module.exports = db;
