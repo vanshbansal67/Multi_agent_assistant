@@ -42,7 +42,10 @@ out/
 
 # ========================
 # ENVIRONMENT & SECRETS
+# Specifically ignore the service account key
+agent-assessment-656aaeb8566f.json
 # ========================
+
 
 # Environment files — NEVER commit these!
 .env
@@ -117,5 +120,3 @@ $RECYCLE.BIN/
 # Linux
 *~
 
-# Specifically ignore the service account key
-agent-assessment-656aaeb8566f.json
